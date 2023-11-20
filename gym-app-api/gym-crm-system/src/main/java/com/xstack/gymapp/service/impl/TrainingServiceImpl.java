@@ -164,16 +164,28 @@ public class TrainingServiceImpl implements TrainingService {
 
             if (searchCriteria.getPeriodFrom() != null) {
                 predicate = cb.and(predicate,
-                        cb.greaterThanOrEqualTo(root.get("periodFrom"), searchCriteria.getPeriodFrom()));
+                        cb.greaterThanOrEqualTo(root.get("trainingDate"), searchCriteria.getPeriodFrom()));
             }
             if (searchCriteria.getPeriodTo() != null) {
                 predicate = cb.and(predicate,
-                        cb.lessThanOrEqualTo(root.get("periodTo"), searchCriteria.getPeriodTo()));
+                        cb.lessThanOrEqualTo(root.get("trainingDate"), searchCriteria.getPeriodTo()));
+            }
+            if (searchCriteria.getTrainerName() != null) {
+                Join<Training, Trainer> trainerJoin = root.join("trainer");
+                Join<Trainer, User> userJoin = trainerJoin.join("user");
+                predicate = cb.and(predicate, cb.like(userJoin.get("firstName"),
+                        "%" + searchCriteria.getTrainerName() + "%"));
             }
             if (searchCriteria.getTrainerName() != null) {
                 Join<Training, Trainer> trainerJoin = root.join("trainer");
                 Join<Trainer, User> userJoin = trainerJoin.join("user");
                 predicate = cb.and(predicate, cb.like(userJoin.get("lastName"),
+                        "%" + searchCriteria.getTrainerName() + "%"));
+            }
+            if (searchCriteria.getTrainerName() != null) {
+                Join<Training, Trainer> trainerJoin = root.join("trainer");
+                Join<Trainer, User> userJoin = trainerJoin.join("user");
+                predicate = cb.and(predicate, cb.like(userJoin.get("username"),
                         "%" + searchCriteria.getTrainerName() + "%"));
             }
             if (searchCriteria.getTrainingType() != null) {
@@ -199,18 +211,31 @@ public class TrainingServiceImpl implements TrainingService {
 
         Specification<Training> spec = (root, query, cb) -> {
             Predicate predicate = cb.equal(root.get("trainer"), trainer);
+
             if (searchCriteria.getPeriodFrom() != null) {
                 predicate = cb.and(predicate,
-                        cb.greaterThanOrEqualTo(root.get("periodFrom"), searchCriteria.getPeriodFrom()));
+                        cb.greaterThanOrEqualTo(root.get("trainingDate"), searchCriteria.getPeriodFrom()));
             }
             if (searchCriteria.getPeriodTo() != null) {
                 predicate = cb.and(predicate,
-                        cb.lessThanOrEqualTo(root.get("periodTo"), searchCriteria.getPeriodTo()));
+                        cb.lessThanOrEqualTo(root.get("trainingDate"), searchCriteria.getPeriodTo()));
+            }
+            if (searchCriteria.getTraineeName() != null) {
+                Join<Training, Trainee> traineeJoin = root.join("trainee");
+                Join<Trainee, User> userJoin = traineeJoin.join("user");
+                predicate = cb.and(predicate, cb.like(userJoin.get("firstName"),
+                        "%" + searchCriteria.getTraineeName() + "%"));
             }
             if (searchCriteria.getTraineeName() != null) {
                 Join<Training, Trainee> traineeJoin = root.join("trainee");
                 Join<Trainee, User> userJoin = traineeJoin.join("user");
                 predicate = cb.and(predicate, cb.like(userJoin.get("lastName"),
+                        "%" + searchCriteria.getTraineeName() + "%"));
+            }
+            if (searchCriteria.getTraineeName() != null) {
+                Join<Training, Trainee> traineeJoin = root.join("trainee");
+                Join<Trainee, User> userJoin = traineeJoin.join("user");
+                predicate = cb.and(predicate, cb.like(userJoin.get("username"),
                         "%" + searchCriteria.getTraineeName() + "%"));
             }
             return predicate;

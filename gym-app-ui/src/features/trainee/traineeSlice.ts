@@ -35,5 +35,3 @@ export const traineeSlice = createSlice({
 export default traineeSlice.reducer
 
 export const selectTraineeProfile = (state: RootState) => state.trainee.profile
-
-// export const { logout } = loginSlice.actions
