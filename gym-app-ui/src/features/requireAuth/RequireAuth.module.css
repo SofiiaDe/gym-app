@@ -1,0 +1,6 @@
+.header {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 18px;
+    align-items: baseline;
+}

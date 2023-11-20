@@ -1,0 +1,37 @@
+.formParent {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+}
+
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 3px;
+  margin-bottom: 3px;
+}
+
+.section {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
+.content {
+  margin-right: 2px;
+}
+
+.image {
+  width: 50%;
+  height: 20%;
+  border-radius: 3px;
+}
