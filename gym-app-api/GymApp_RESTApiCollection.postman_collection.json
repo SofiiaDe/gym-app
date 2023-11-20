@@ -1,0 +1,1813 @@
+{
+	"info": {
+		"_postman_id": "e8628885-66fa-479d-90ac-7cd817afc89c",
+		"name": "GymApp_RESTApiCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21091574"
+	},
+	"item": [
+		{
+			"name": "Register trainee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Mark\",\r\n    \"lastName\": \"Willson\",\r\n    \"birthDate\": \"1992-04-19\",\r\n    \"address\": \"Kyiv, Vasylkivska St. 14\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainees"
+					]
+				},
+				"description": "Register Trainee"
+			},
+			"response": [
+				{
+					"name": "Register trainee Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Mark\",\r\n    \"lastName\": \"Willson\",\r\n    \"birthDate\": \"1992-04-19\",\r\n    \"address\": \"Kyiv, Vasylkivska St. 14\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trainee/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainee",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 20 Aug 2023 04:26:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"Mark.Willson\",\n    \"password\": \"tKLBUMM4Ej\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Register trainer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Henry\",\r\n    \"lastName\": \"Smith\",\r\n    \"specialization\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainer/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainer",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register trainer Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Henry\",\r\n    \"lastName\": \"Smith\",\r\n    \"specialization\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/trainer/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 20 Aug 2023 19:56:39 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"Henry.Smith\",\n    \"password\": \"EBgJ8cNeWu\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Change password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJrLldpbGxzb24xIiwiaWF0IjoxNjkzOTUwMjg4LCJleHAiOjE2OTQwMzY2ODh9.dTUJPDM7ykfT0zd_CJxt6PoZlFcXzLB5scaUe65wOi8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson1\",\r\n    \"oldPassword\": \"pslfpt8an3\",\r\n    \"newPassword\": \"X4HHACf1aa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/change-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"change-password"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Change password Response",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mark.Willson\",\r\n    \"oldPassword\": \"X4HHACf1vW\",\r\n    \"newPassword\": \"X4HHACf1aa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/login/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login",
+								"change-password"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 20 Aug 2023 22:30:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Password changed successfully"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson3\",\r\n    \"password\": \"kIX2S7V1NA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"hbE3nQjCGP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Sep 2023 17:37:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIZW5yeS5TbWl0aCIsImlhdCI6MTY5MzY3NjIyNywiZXhwIjoxNjkzNzYyNjI3fQ.v8y1PuG90rVUzn61ew40Znz04xV-ZveW85Q158S7E58\",\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIZW5yeS5TbWl0aCIsImlhdCI6MTY5MzY3NjIyNywiZXhwIjoxNjk0MjgxMDI3fQ.Pg3vsaVUeyyJVG1VDxmkPpgc_yoIZ0_S-Hci0omC_rY\",\n    \"loggedIn\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get trainee profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJrLldpbGxzb24zIiwiaWF0IjoxNjk5OTg5NjkyLCJleHAiOjE3MDAwNzYwOTJ9.6W_bcmqPSL8DbJkejqcjrnJBMZJlmNYt5TkyHKjET-E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson3\",\r\n    \"password\": \"kIX2S7V1NA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainees/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainees",
+						"profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get trainee profile Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mark.Willson\",\r\n    \"password\": \"X4HHACf1aa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainee/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainee",
+								"profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 06:23:52 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firstName\": \"Mark\",\n    \"lastName\": \"Willson\",\n    \"birthDate\": \"1992-04-19\",\n    \"address\": \"Kyiv, Vasylkivska St. 14\",\n    \"trainers\": [\n        {\n            \"username\": \"Henry.Smith\",\n            \"firstName\": \"Henry\",\n            \"lastName\": \"Smith\",\n            \"specialization\": \"Fitness\"\n        }\n    ],\n    \"active\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Trainee's trainings list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJrLldpbGxzb24zIiwiaWF0IjoxNjk5OTg5NjkyLCJleHAiOjE3MDAwNzYwOTJ9.6W_bcmqPSL8DbJkejqcjrnJBMZJlmNYt5TkyHKjET-E",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson3\",\r\n    \"password\": \"kIX2S7V1NA\",\r\n    \"periodFrom\": \"2023-08-16\",\r\n    \"periodTo\": \"2023-10-30\",\r\n    \"trainerName\": null,\r\n    \"trainingType\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainings/trainee/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainings",
+						"trainee",
+						"list"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get Trainee's trainings list Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mark.Willson\",\r\n    \"password\": \"yQRd2oG5Cv\",\r\n    \"periodFrom\": \"2023-08-16\",\r\n    \"periodTo\": \"2023-10-30\",\r\n    \"trainerName\": null,\r\n    \"trainingType\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/training/trainee/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"training",
+								"trainee",
+								"list"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Aug 2023 18:54:41 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"trainingName\": \"Evening Fitness\",\n        \"trainingDate\": \"2023-09-30\",\n        \"trainingType\": \"Fitness\",\n        \"trainingDuration\": 60,\n        \"trainerName\": \"Henry Smith\"\n    },\n    {\n        \"trainingName\": \"Morning Yoga\",\n        \"trainingDate\": \"2023-10-11\",\n        \"trainingType\": \"Yoga\",\n        \"trainingDuration\": 45,\n        \"trainerName\": \"Henry Smith\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Delete trainee",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJrLldpbGxzb24zIiwiaWF0IjoxNjkzOTU3MTg1LCJleHAiOjE2OTQwNDM1ODV9.oOvx_PR2eDIHsAzQU_oF0dqHL3vydlb_4ZsVKDSnE0Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson3\",\r\n    \"password\": \"cUk3Idz3kU\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainees"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Delete trainee Response",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mark.Willson\",\r\n    \"password\": \"X4HHACf1aa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainee/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainee",
+								"delete"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 13:31:29 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Trainee profile deleted successfully"
+				}
+			]
+		},
+		{
+			"name": "Update trainee profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJrLldpbGxzb24xIiwiaWF0IjoxNjkzOTU2NjM5LCJleHAiOjE2OTQwNDMwMzl9.4rTi0JeYJczA_SNrd-5yqdq1UYTwsG8r5xyKa_cIRyY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson1\",\r\n    \"password\": \"X4HHACf1aa\",\r\n    \"firstName\": \"Mark\",\r\n    \"lastName\": \"Willson\",\r\n    \"birthDate\": \"1999-02-12\",\r\n    \"address\": \"Kyiv, Stusa St. 101\",\r\n    \"isActive\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainees"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update trainee profile Response",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mark.Willson\",\r\n    \"password\": \"7sHBHHC7hz\",\r\n    \"firstName\": \"Mark\",\r\n    \"lastName\": \"Willson\",\r\n    \"birthDate\": \"1994-02-10\",\r\n    \"address\": \"Kyiv, Stusa St. 101\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainee/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainee",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 19:31:48 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"Mark.Willson\",\n    \"firstName\": \"Mark\",\n    \"lastName\": \"Willson\",\n    \"birthDate\": \"1994-02-10\",\n    \"address\": \"Kyiv, Stusa St. 101\",\n    \"trainers\": [\n        {\n            \"username\": \"Henry.Smith\",\n            \"firstName\": \"Henry\",\n            \"lastName\": \"Smith\",\n            \"specialization\": \"Fitness\"\n        }\n    ],\n    \"active\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get not assigned on trainee active trainers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJrLldpbGxzb24xIiwiaWF0IjoxNjkzOTU2NjM5LCJleHAiOjE2OTQwNDMwMzl9.4rTi0JeYJczA_SNrd-5yqdq1UYTwsG8r5xyKa_cIRyY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson1\",\r\n    \"password\": \"X4HHACf1aa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainings/unassigned-trainers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainings",
+						"unassigned-trainers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get not assigned on trainee active trainers",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Sam.Keily\",\r\n    \"password\": \"UdbGuV8KMT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/training/unassigned-trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"training",
+								"unassigned-trainers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Aug 2023 19:29:12 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"username\": \"Henry.Smith\",\n        \"firstName\": \"Henry\",\n        \"lastName\": \"Smith\",\n        \"specialization\": \"Fitness\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Update trainee's trainers list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTYW0uS2VpbHkiLCJpYXQiOjE2OTM5NTk2MzIsImV4cCI6MTY5NDA0NjAzMn0.TVAbVm9h83ORjIRgsKlp-esADqo-c3qP5TuGSJ-mWNA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"traineeUsername\": \"Sam.Keily\",\r\n    \"trainerUsernames\": [\r\n        \"Henry.Smith\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainees/update-trainers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainees",
+						"update-trainers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update trainee's trainers list",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"traineeUsername\": \"Sam.Keily1\",\r\n    \"trainerUsernames\": [\r\n        \"Henry.Smith\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainee/update-trainers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainee",
+								"update-trainers"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 20:52:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"username\": \"Henry.Smith\",\n        \"firstName\": \"Henry\",\n        \"lastName\": \"Smith\",\n        \"specialization\": \"Fitness\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Update trainer profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIZW5yeS5TbWl0aCIsImlhdCI6MTY5Mzk1MDI1NCwiZXhwIjoxNjk0MDM2NjU0fQ.9zXHGuPCikFmcIBrQA_QOWeJjnigZwwq8uAcVLYLvgU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"hbE3nQjCGP\",\r\n    \"firstName\": \"Henry\",\r\n    \"lastName\": \"Smith\",\r\n    \"specialization\": \"Fitness\",\r\n    \"isActive\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainers"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update trainer profile Response",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"yQRd2oG5Cv\",\r\n    \"firstName\": \"Henry\",\r\n    \"lastName\": \"Smith\",\r\n    \"specialization\": \"Fitness\",\r\n    \"isActive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainer/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainer",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 21:22:03 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"Henry.Smith\",\n    \"firstName\": \"Henry\",\n    \"lastName\": \"Smith\",\n    \"specialization\": \"Fitness\",\n    \"trainees\": [\n        {\n            \"username\": \"Mark.Willson\",\n            \"firstName\": \"Mark\",\n            \"lastName\": \"Willson\"\n        },\n        {\n            \"username\": \"Sam.Keily1\",\n            \"firstName\": \"Sam\",\n            \"lastName\": \"Keily\"\n        }\n    ],\n    \"active\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "Get trainer profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIZW5yeS5TbWl0aCIsImlhdCI6MTY5Mzk1MDI1NCwiZXhwIjoxNjk0MDM2NjU0fQ.9zXHGuPCikFmcIBrQA_QOWeJjnigZwwq8uAcVLYLvgU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"hbE3nQjCGP\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainers/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainers",
+						"profile"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get trainer profile Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"yQRd2oG5Cv\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainer/profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainer",
+								"profile"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 21:31:19 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"firstName\": \"Henry\",\n    \"lastName\": \"Smith\",\n    \"specialization\": \"Fitness\",\n    \"trainees\": [\n        {\n            \"username\": \"Mark.Willson\",\n            \"firstName\": \"Mark\",\n            \"lastName\": \"Willson\"\n        },\n        {\n            \"username\": \"Sam.Keily1\",\n            \"firstName\": \"Sam\",\n            \"lastName\": \"Keily\"\n        }\n    ],\n    \"active\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "Get trainer's trainings list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIZW5yeS5TbWl0aCIsImlhdCI6MTY5Mzk1MDI1NCwiZXhwIjoxNjk0MDM2NjU0fQ.9zXHGuPCikFmcIBrQA_QOWeJjnigZwwq8uAcVLYLvgU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"hbE3nQjCGP\",\r\n    \"periodFrom\": \"2023-08-16\",\r\n    \"periodTo\": \"2023-10-30\",\r\n    \"traineeName\": null\r\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainings/trainer/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainings",
+						"trainer",
+						"list"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get trainer's trainings list Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"yQRd2oG5Cv\",\r\n    \"periodFrom\": \"2023-08-16\",\r\n    \"periodTo\": \"2023-10-30\",\r\n    \"traineeName\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/training/trainer/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"training",
+								"trainer",
+								"list"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Aug 2023 19:28:26 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"trainingName\": \"Evening Fitness\",\n        \"trainingDate\": \"2023-09-30\",\n        \"trainingType\": \"Fitness\",\n        \"trainingDuration\": 60,\n        \"traineeName\": \"Mark Smith\"\n    },\n    {\n        \"trainingName\": \"Morning Yoga\",\n        \"trainingDate\": \"2023-10-11\",\n        \"trainingType\": \"Yoga\",\n        \"trainingDuration\": 45,\n        \"traineeName\": \"Mark Smith\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Add training",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIZW5yeS5TbWl0aCIsImlhdCI6MTY5Mzk4Mzg3NiwiZXhwIjoxNjk0MDcwMjc2fQ.bJP1vXvgnabtQj2t_bCIyxC_4qoAtmBkf_9cxo8rfCY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"traineeUsername\": \"Mark.Willson\",\r\n    \"trainerUsername\": \"Henry.Smith\",\r\n    \"trainingName\": \"Evening Fitness\",\r\n    \"trainingType\": \"Fitness\",\r\n    \"trainingDate\": \"2023-09-30\",\r\n    \"trainingDuration\": 60\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainings/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainings",
+						"add"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Add training Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"traineeUsername\": \"Mark.Willson\",\r\n    \"trainerUsername\": \"Henry.Smith\",\r\n    \"trainingName\": \"Evening Fitness\",\r\n    \"trainingType\": \"Fitness\",\r\n    \"trainingDate\": \"2023-09-30\",\r\n    \"trainingDuration\": 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/training/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"training",
+								"add"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "27"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 25 Aug 2023 22:53:24 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Training added successfully"
+				}
+			]
+		},
+		{
+			"name": "Activate / Deactivate trainee",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJNYXJrLldpbGxzb24xIiwiaWF0IjoxNjkzOTU2NjM5LCJleHAiOjE2OTQwNDMwMzl9.4rTi0JeYJczA_SNrd-5yqdq1UYTwsG8r5xyKa_cIRyY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Mark.Willson1\",\r\n    \"password\": \"X4HHACf1aa\",\r\n    \"isActive\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainees/active-status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainees",
+						"active-status"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Activate / Deactivate trainee",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mark.Willson1\",\r\n    \"password\": \"pslfpt8an3\",\r\n    \"isActive\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainee/active-status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainee",
+								"active-status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Sep 2023 17:10:40 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Trainee deactivated successfully"
+				}
+			]
+		},
+		{
+			"name": "Activate / Deactivate trainer",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJIZW5yeS5TbWl0aCIsImlhdCI6MTY5Mzk1MDI1NCwiZXhwIjoxNjk0MDM2NjU0fQ.9zXHGuPCikFmcIBrQA_QOWeJjnigZwwq8uAcVLYLvgU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"hbE3nQjCGP\",\r\n    \"isActive\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/trainers/active-status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainers",
+						"active-status"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Activate / Deactivate trainer Response",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Henry.Smith\",\r\n    \"password\": \"yQRd2oG5Cv\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/trainer/active-status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"trainer",
+								"active-status"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "30"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 26 Aug 2023 15:16:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Trainer activated successfully"
+				}
+			]
+		},
+		{
+			"name": "Delete training",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/trainings/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"trainings",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health check for trainer-microservice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Health check for trainer-microservice response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.spring-boot.actuator.v3+json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 18 Oct 2023 17:57:17 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"UP\",\n    \"components\": {\n        \"api\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"message\": \"API is healthy\"\n            }\n        },\n        \"db\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"database\": \"MySQL\",\n                \"validationQuery\": \"isValid()\"\n            }\n        },\n        \"diskSpace\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"total\": 399430905856,\n                \"free\": 26157240320,\n                \"threshold\": 10485760,\n                \"path\": \"C:\\\\Users\\\\Sofiia\\\\EPAM\\\\xstack-java-js-cloud\\\\gym-app\\\\gym-app-backend\\\\.\",\n                \"exists\": true\n            }\n        },\n        \"ping\": {\n            \"status\": \"UP\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Health check for gym-crm-system",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actuator/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Health check for gym-crm-system response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/actuator/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Method"
+						},
+						{
+							"key": "Vary",
+							"value": "Access-Control-Request-Headers"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/vnd.spring-boot.actuator.v3+json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 18 Oct 2023 18:02:12 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": \"UP\",\n    \"components\": {\n        \"api\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"message\": \"API is healthy\"\n            }\n        },\n        \"circuitBreakers\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"trainer-service\": {\n                    \"status\": \"UP\",\n                    \"details\": {\n                        \"failureRate\": \"-1.0%\",\n                        \"failureRateThreshold\": \"50.0%\",\n                        \"slowCallRate\": \"-1.0%\",\n                        \"slowCallRateThreshold\": \"100.0%\",\n                        \"bufferedCalls\": 0,\n                        \"slowCalls\": 0,\n                        \"slowFailedCalls\": 0,\n                        \"failedCalls\": 0,\n                        \"notPermittedCalls\": 0,\n                        \"state\": \"CLOSED\"\n                    }\n                }\n            }\n        },\n        \"db\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"database\": \"MySQL\",\n                \"validationQuery\": \"isValid()\"\n            }\n        },\n        \"discoveryComposite\": {\n            \"description\": \"Discovery Client not initialized\",\n            \"status\": \"UNKNOWN\",\n            \"components\": {\n                \"discoveryClient\": {\n                    \"description\": \"Discovery Client not initialized\",\n                    \"status\": \"UNKNOWN\"\n                }\n            }\n        },\n        \"diskSpace\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"total\": 399430905856,\n                \"free\": 26155876352,\n                \"threshold\": 10485760,\n                \"path\": \"C:\\\\Users\\\\Sofiia\\\\EPAM\\\\xstack-java-js-cloud\\\\gym-app\\\\gym-app-backend\\\\.\",\n                \"exists\": true\n            }\n        },\n        \"ping\": {\n            \"status\": \"UP\"\n        },\n        \"refreshScope\": {\n            \"status\": \"UP\"\n        },\n        \"training\": {\n            \"status\": \"UP\",\n            \"details\": {\n                \"trainings\": {\n                    \"Evening Fitness\": 60\n                }\n            }\n        },\n        \"url\": {\n            \"status\": \"UP\"\n        }\n    }\n}"
+				}
+			]
+		}
+	]
+}
