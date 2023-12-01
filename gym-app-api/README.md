@@ -5,14 +5,6 @@ Eureka: http://localhost:8761
 SonarQube: http://localhost:9000/
 Jenkins: http://localhost:9090/
 
-Jenkins creds:
-admin user:
-  username: sofiia_admin
-  password: 0LpjfeMZYIzFLAtiLK0f
-dev user:
-  username: dev_user
-  password: dev_J95@
-
 SonarQube analyze
 mvn clean verify sonar:sonar \
 -Dsonar.projectKey=gym-app \
