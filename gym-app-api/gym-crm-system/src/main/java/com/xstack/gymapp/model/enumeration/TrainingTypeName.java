@@ -1,11 +1,11 @@
 package com.xstack.gymapp.model.enumeration;
 
 public enum TrainingTypeName {
-  FITNESS("Fitness"),
-  YOGA("Yoga"),
-  ZUMBA("Zumba"),
-  STRETCHING("Stretching"),
-  RESISTANCE("Resistance");
+  FITNESS("fitness"),
+  YOGA("yoga"),
+  ZUMBA("zumba"),
+  STRETCHING("stretching"),
+  RESISTANCE("resistance");
 
   private final String name;
 

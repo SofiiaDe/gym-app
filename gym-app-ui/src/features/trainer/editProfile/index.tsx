@@ -44,7 +44,7 @@ export default function EditProfile() {
   const [specialization, setSpecialization] = useState(
     profile?.specialization || "",
   )
-  const [active, setActive] = useState(profile?.active || false)
+  const [active, setActive] = useState(profile?.isActive || false)
 
   useEffect(() => {
     if (!profile) return
@@ -52,7 +52,7 @@ export default function EditProfile() {
     setLastName(profile.lastName)
     setUsername(usernameFromState)
     setSpecialization(profile.specialization || "")
-    setActive(profile.active)
+    setActive(profile.isActive)
   }, [profile])
 
   const [showSnackbar, setShowSnackbar] = useState(false)
@@ -69,7 +69,7 @@ export default function EditProfile() {
       lastName,
       username,
       specialization,
-      active,
+      isActive: active,
     }).then((response) => {
       if (!("error" in response)) {
         setUsernameCookie(username)

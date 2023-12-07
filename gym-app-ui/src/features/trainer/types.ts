@@ -6,5 +6,5 @@ export interface Trainer {
   username: string
   specialization: string
   trainees: TraineeShortInfo[]
-  active: boolean
+  isActive: boolean
 }

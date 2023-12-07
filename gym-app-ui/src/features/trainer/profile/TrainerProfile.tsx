@@ -1,7 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material"
 import { useSelector } from "react-redux"
 import Loader from "../../../app/components/Loader"
-import { getUsernameCookie } from "../../../utils"
 import { selectUsername } from "../../user/login/loginSlice"
 import { useGetTrainerProfileQuery } from "../trainerProfileAPI"
 import { selectTrainerProfile } from "../trainerSlice"
@@ -58,7 +57,7 @@ export default function TrainerProfile() {
             Status
           </Typography>
           <Typography variant="body1">
-            {profile.active ? "Active" : "Inactive"}
+            {profile.isActive ? "Active" : "Inactive"}
           </Typography>
           <Typography variant="subtitle1" sx={headerSx}>
             First Name

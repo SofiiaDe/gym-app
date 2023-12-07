@@ -610,7 +610,7 @@ class TraineeServiceTest {
             .username("trainerUsername1")
             .build())
         .specialization(TrainingTypeDto.builder()
-            .trainingTypeName("Resistance")
+            .trainingTypeName("resistance")
             .build())
         .build();
     TrainerDto trainerDto2 = TrainerDto.builder()
@@ -618,7 +618,7 @@ class TraineeServiceTest {
             .username("trainerUsername2")
             .build())
         .specialization(TrainingTypeDto.builder()
-            .trainingTypeName("Yoga")
+            .trainingTypeName("yoga")
             .build())
         .build();
 
@@ -657,8 +657,8 @@ class TraineeServiceTest {
     assertEquals(2, result.size());
     assertEquals("trainerUsername1", result.get(0).getUsername());
     assertEquals("trainerUsername2", result.get(1).getUsername());
-    assertEquals("Resistance", result.get(0).getSpecialization());
-    assertEquals("Yoga", result.get(1).getSpecialization());
+    assertEquals("resistance", result.get(0).getSpecialization());
+    assertEquals("yoga", result.get(1).getSpecialization());
 
     verify(userRepository, times(1)).findByUsername("Test.Username");
     verify(traineeRepository, times(1)).findByUser(user);
