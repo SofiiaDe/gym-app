@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material"
 import { useEffect } from "react"
-import { useLogoutMutation } from "../features/requireAuth/requireAuthAPI"
 import { useAppDispatch } from "../app/hooks"
 import { logout as logoutAction } from "../features/user/login/loginSlice"
 

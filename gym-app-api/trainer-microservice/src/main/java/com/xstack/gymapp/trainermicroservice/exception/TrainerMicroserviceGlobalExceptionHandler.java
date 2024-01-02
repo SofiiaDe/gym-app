@@ -18,5 +18,10 @@ public class TrainerMicroserviceGlobalExceptionHandler extends ResponseEntityExc
   public ResponseEntity<String> handleTrainerWorkloadProcessingException(TrainerWorkloadProcessingException ex) {
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
   }
+
+  @ExceptionHandler(JwtAuthException.class)
+  public ResponseEntity<String> handleJwtAuthException(JwtAuthException ex) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ex.getMessage());
+  }
     
 }

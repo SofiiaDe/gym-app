@@ -1,16 +1,5 @@
 package com.xstack.gymapp.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.xstack.gymapp.exception.EntityNotFoundException;
 import com.xstack.gymapp.model.dto.UserDto;
 import com.xstack.gymapp.model.payload.LoginRequest;
@@ -21,8 +10,6 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
-import java.util.Set;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,6 +25,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class LoginServiceTest {
@@ -60,13 +54,16 @@ class LoginServiceTest {
   @Mock
   private PasswordEncoder passwordEncoder;
 
+  @Mock
+  private TrainerService trainerService;
+
   private LoginService loginService;
   private Validator validator;
 
   @BeforeEach
   public void setUp() {
     loginService = new LoginServiceImpl(userService, tokenService, jwtService,
-        authenticationManager, passwordEncoder);
+        authenticationManager, passwordEncoder, trainerService);
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     validator = factory.getValidator();
   }

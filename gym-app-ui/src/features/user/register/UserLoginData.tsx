@@ -1,7 +1,7 @@
-import { Box, Button, Checkbox, Snackbar, Typography } from "@mui/material"
+import CheckIcon from "@mui/icons-material/Check"
+import { Box, Button, Snackbar, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import CheckIcon from "@mui/icons-material/Check"
 
 export function UserLoginData(props: {
   firstName: string

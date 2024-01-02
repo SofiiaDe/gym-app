@@ -38,8 +38,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @ExtendWith(MockitoExtension.class)
 class TrainingControllerTest {
 
-  private MockMvc mockMvc;
+  private static final String TRAININGS_API = "/api/trainings";
 
+  private MockMvc mockMvc;
   @Mock
   private TrainingService trainingService;
 
@@ -58,7 +59,6 @@ class TrainingControllerTest {
   void testGetTraineeTrainingsListWhenValidRequest() throws Exception {
     TraineeTrainingSearchCriteria validSearchCriteria = TraineeTrainingSearchCriteria.builder()
         .username("validUsername")
-        .password("validPassword")
         .periodFrom(LocalDate.parse("2023-01-01"))
         .periodTo(LocalDate.parse("2023-12-31"))
         .trainerName("Trainer A")
@@ -78,7 +78,7 @@ class TrainingControllerTest {
     when(trainingService.getTraineeTrainingsList(validSearchCriteria)).thenReturn(trainingsList);
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/training/trainee/list")
+        .post(TRAININGS_API + "/trainee/list")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(validSearchCriteria));
 
@@ -95,7 +95,6 @@ class TrainingControllerTest {
   void testGetTraineeTrainingsListWhenInvalidRequest() throws Exception {
     TraineeTrainingSearchCriteria invalidSearchCriteria = TraineeTrainingSearchCriteria.builder()
         .username(null)
-        .password(null)
         .periodFrom(null)
         .periodTo(null)
         .trainerName(null)
@@ -103,7 +102,7 @@ class TrainingControllerTest {
         .build();
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/training/trainee/list")
+        .post(TRAININGS_API + "/trainee/list")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(invalidSearchCriteria));
 
@@ -115,7 +114,6 @@ class TrainingControllerTest {
               new TypeReference<>() {
               });
           assertEquals("Username is required", errors.get("username"));
-          assertEquals("Password is required", errors.get("password"));
         });
 
     verify(trainingService, never()).getTraineeTrainingsList(
@@ -142,9 +140,9 @@ class TrainingControllerTest {
         validLoginRequest.getUsername())).thenReturn(trainersList);
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/training/unassigned-trainers")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(validLoginRequest));
+        .get(TRAININGS_API + "/unassigned-trainers")
+            .param("username", "validUsername")
+        .contentType(MediaType.APPLICATION_JSON);
 
     mockMvc.perform(requestBuilder)
         .andExpect(MockMvcResultMatchers.status().isOk())
@@ -162,7 +160,7 @@ class TrainingControllerTest {
         .build();
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/training/unassigned-trainers")
+        .get(TRAININGS_API + "/unassigned-trainers")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(invalidLoginRequest));
 
@@ -176,7 +174,6 @@ class TrainingControllerTest {
   void testGetTrainerTrainingsListValidRequest() throws Exception {
     TrainerTrainingSearchCriteria validSearchCriteria = TrainerTrainingSearchCriteria.builder()
         .username("validUsername")
-        .password("validPassword")
         .periodFrom(LocalDate.parse("2023-01-01"))
         .periodTo(LocalDate.parse("2023-12-31"))
         .traineeName("Trainee A")
@@ -195,7 +192,7 @@ class TrainingControllerTest {
     when(trainingService.getTrainerTrainingsList(validSearchCriteria)).thenReturn(trainingsList);
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/training/trainer/list")
+        .post(TRAININGS_API + "/trainer/list")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(validSearchCriteria));
 
@@ -212,14 +209,13 @@ class TrainingControllerTest {
   void testGetTrainerTrainingsListWhenInvalidRequest() throws Exception {
     TrainerTrainingSearchCriteria invalidSearchCriteria = TrainerTrainingSearchCriteria.builder()
         .username(null)
-        .password(null)
         .periodFrom(null)
         .periodTo(null)
         .traineeName(null)
         .build();
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/training/trainer/list")
+        .post(TRAININGS_API + "/trainer/list")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(invalidSearchCriteria)); // Provide valid JSON data
 
@@ -244,7 +240,7 @@ class TrainingControllerTest {
     doNothing().when(trainingService).addTraining(validAddTrainingRequest);
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .post("/api/training/add")
+        .post(TRAININGS_API + "/add")
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(validAddTrainingRequest));
 
@@ -265,10 +261,9 @@ class TrainingControllerTest {
         .build();
 
     MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .post("/api/training/add")
+        .post(TRAININGS_API + "/add")
         .contentType(MediaType.APPLICATION_JSON)
-        .content(
-            objectMapper.writeValueAsString(invalidAddTrainingRequest)); // Provide valid JSON data
+        .content(objectMapper.writeValueAsString(invalidAddTrainingRequest));
 
     mockMvc.perform(requestBuilder)
         .andExpect(MockMvcResultMatchers.status().isBadRequest());

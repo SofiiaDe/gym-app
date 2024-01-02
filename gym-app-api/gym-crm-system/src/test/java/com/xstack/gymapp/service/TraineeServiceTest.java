@@ -483,12 +483,13 @@ class TraineeServiceTest {
 
   @Test
   void testGetTraineeProfileWhenValidRequest() {
-    LoginRequest loginRequest = new LoginRequest("username", "password");
+//    LoginRequest loginRequest = new LoginRequest("username", "password");
+    String username = "username";
     UserDto userDto = UserDto.builder()
-        .username("username")
+        .username(username)
         .build();
     User user = User.builder()
-        .username("username")
+        .username(username)
         .build();
     TraineeDto traineeDto = TraineeDto.builder()
         .user(userDto)
@@ -520,11 +521,11 @@ class TraineeServiceTest {
             Trainer.builder().id(2L).build()
         )).build();
 
-    when(userRepository.findByUsername(loginRequest.getUsername())).thenReturn(Optional.of(user));
+    when(userRepository.findByUsername(username)).thenReturn(Optional.of(user));
     when(traineeRepository.findByUser(user)).thenReturn(Optional.of(trainee));
     when(traineeMapper.toDto(any(Trainee.class), any(CycleAvoidingMappingContext.class)))
         .thenReturn(traineeDto);
-    TraineeProfile traineeProfile = traineeService.getTraineeProfile(loginRequest);
+    TraineeProfile traineeProfile = traineeService.getTraineeProfile(username);
 
     assertNotNull(traineeProfile);
     assertEquals(traineeDto.getUser().getFirstName(), traineeProfile.getFirstName());
@@ -551,24 +552,26 @@ class TraineeServiceTest {
 
   @Test
   void testGetTraineeProfileWhenNotFoundUser() {
-    LoginRequest loginRequest = new LoginRequest("nonExistentUsername", "password");
+//    LoginRequest loginRequest = new LoginRequest("nonExistentUsername", "password");
 
+    String nonExistentUsername = "nonExistentUsername";
     Exception exception = assertThrows(EntityNotFoundException.class, () -> {
-      traineeService.getTraineeProfile(loginRequest);
+      traineeService.getTraineeProfile(nonExistentUsername);
     });
 
-    assertEquals("Cannot find the user with username = " + loginRequest.getUsername(),
+    assertEquals("Cannot find the user with username = " + nonExistentUsername,
         exception.getMessage());
   }
 
   @Test
   void testGetTraineeProfileWhenNullTrainers() {
-    LoginRequest loginRequest = new LoginRequest("usernameWithNoTrainers", "password");
+//    LoginRequest loginRequest = new LoginRequest("usernameWithNoTrainers", "password");
+    String username = "usernameWithNoTrainers";
     UserDto userDto = UserDto.builder()
-        .username("usernameWithNoTrainers")
+        .username(username)
         .build();
     User user = User.builder()
-        .username("usernameWithNoTrainers")
+        .username(username)
         .build();
     TraineeDto traineeDto = TraineeDto.builder()
         .user(userDto)
@@ -580,12 +583,12 @@ class TraineeServiceTest {
         .trainers(null)
         .build();
 
-    when(userRepository.findByUsername(loginRequest.getUsername())).thenReturn(Optional.of(user));
+    when(userRepository.findByUsername(username)).thenReturn(Optional.of(user));
     when(traineeRepository.findByUser(user)).thenReturn(Optional.of(trainee));
     when(traineeMapper.toDto(any(Trainee.class), any(CycleAvoidingMappingContext.class)))
         .thenReturn(traineeDto);
 
-    TraineeProfile traineeProfile = traineeService.getTraineeProfile(loginRequest);
+    TraineeProfile traineeProfile = traineeService.getTraineeProfile(username);
 
     assertNotNull(traineeProfile);
     assertNotNull(traineeProfile.getTrainers());

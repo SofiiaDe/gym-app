@@ -25,6 +25,7 @@ import com.xstack.gymapp.model.entity.TrainingType;
 import com.xstack.gymapp.model.entity.User;
 import com.xstack.gymapp.model.mapper.CycleAvoidingMappingContext;
 import com.xstack.gymapp.model.mapper.TrainerMapper;
+import com.xstack.gymapp.model.mapper.UserMapper;
 import com.xstack.gymapp.model.payload.RegistrationResponse;
 import com.xstack.gymapp.model.payload.TrainerRegistrationRequest;
 import com.xstack.gymapp.model.payload.UpdateTrainerProfileRequest;
@@ -62,6 +63,9 @@ class TrainerServiceTest {
   private TrainerMapper trainerMapper;
 
   @Mock
+  private UserMapper userMapper;
+
+  @Mock
   private UserService userService;
 
   @Mock
@@ -77,7 +81,7 @@ class TrainerServiceTest {
   @BeforeEach
   public void setUp() {
     trainerService = new TrainerServiceImpl(trainerRepository, userRepository, trainingTypeService,
-        trainerMapper, userService, passwordEncoder);
+        trainerMapper, userMapper, userService, passwordEncoder);
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     validator = factory.getValidator();
   }

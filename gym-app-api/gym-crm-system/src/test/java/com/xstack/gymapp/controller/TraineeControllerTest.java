@@ -19,10 +19,12 @@ import com.xstack.gymapp.model.payload.UpdateTraineeProfileRequest;
 import com.xstack.gymapp.model.payload.UpdateTraineeProfileResponse;
 import com.xstack.gymapp.model.payload.UpdateTraineeTrainersListRequest;
 import com.xstack.gymapp.service.TraineeService;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,388 +41,353 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @ExtendWith(MockitoExtension.class)
 class TraineeControllerTest {
 
-  private MockMvc mockMvc;
+    private static final String TRAINEES_API = "/api/trainees";
 
-  @Mock
-  private TraineeService traineeService;
+    private MockMvc mockMvc;
 
-  @InjectMocks
-  private TraineeController traineeController;
+    @Mock
+    private TraineeService traineeService;
 
-  private ObjectMapper objectMapper;
+    @InjectMocks
+    private TraineeController traineeController;
 
-  @BeforeEach
-  public void setup() {
-    mockMvc = MockMvcBuilders.standaloneSetup(traineeController).build();
-    objectMapper = new ObjectMapper();
-  }
+    private ObjectMapper objectMapper;
 
-  @Test
-  void testRegisterTraineeWhenValidRequest() throws Exception {
-    TraineeRegistrationRequest validRegistrationRequest = TraineeRegistrationRequest.builder()
-        .firstName("John")
-        .lastName("Doe")
-        .birthDate(LocalDate.of(1990, 1, 1))
-        .address("123 Main St")
-        .build();
+    @BeforeEach
+    public void setup() {
+        mockMvc = MockMvcBuilders.standaloneSetup(traineeController).build();
+        objectMapper = new ObjectMapper();
+    }
 
-    RegistrationResponse registrationResponse = RegistrationResponse.builder()
-        .username("newUsername")
-        .password("newPassword")
-        .build();
+    @Test
+    void testRegisterTraineeWhenValidRequest() throws Exception {
+        TraineeRegistrationRequest validRegistrationRequest = TraineeRegistrationRequest.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .birthDate(LocalDate.of(1990, 1, 1))
+                .address("123 Main St")
+                .build();
 
-    when(traineeService.createTrainee(any(TraineeRegistrationRequest.class))).thenReturn(
-        registrationResponse);
+        RegistrationResponse registrationResponse = RegistrationResponse.builder()
+                .username("newUsername")
+                .password("newPassword")
+                .build();
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .post("/api/trainee/register")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(validRegistrationRequest));
+        when(traineeService.createTrainee(any(TraineeRegistrationRequest.class))).thenReturn(
+                registrationResponse);
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isCreated())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("newUsername"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("newPassword"));
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post(TRAINEES_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(validRegistrationRequest));
 
-  @Test
-  void testRegisterTraineeWhenNullRequestProperties() throws Exception {
-    TraineeRegistrationRequest invalidRegistrationRequest = TraineeRegistrationRequest.builder()
-        .firstName(null)
-        .lastName(null)
-        .birthDate(null)
-        .address(null)
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("newUsername"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("newPassword"));
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .post("/api/trainee/register")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidRegistrationRequest));
+    @Test
+    void testRegisterTraineeWhenNullRequestProperties() throws Exception {
+        TraineeRegistrationRequest invalidRegistrationRequest = TraineeRegistrationRequest.builder()
+                .firstName(null)
+                .lastName(null)
+                .birthDate(null)
+                .address(null)
+                .build();
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response,
-              new TypeReference<>() {
-              });
-          assertEquals("First Name is required", errors.get("firstName"));
-          assertEquals("Last Name is required", errors.get("lastName"));
-        });
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post(TRAINEES_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidRegistrationRequest));
 
-  @Test
-  void testRegisterTraineeEmptyRequestProperties() throws Exception {
-    TraineeRegistrationRequest invalidRegistrationRequest = TraineeRegistrationRequest.builder()
-        .firstName("")
-        .lastName("")
-        .birthDate(null)
-        .address("")
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> {
+                    String response = result.getResponse().getContentAsString();
+                    Map<String, String> errors = objectMapper.readValue(response,
+                            new TypeReference<>() {
+                            });
+                    assertEquals("First Name is required", errors.get("firstName"));
+                    assertEquals("Last Name is required", errors.get("lastName"));
+                });
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .post("/api/trainee/register")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidRegistrationRequest));
+    @Test
+    void testRegisterTraineeEmptyRequestProperties() throws Exception {
+        TraineeRegistrationRequest invalidRegistrationRequest = TraineeRegistrationRequest.builder()
+                .firstName("")
+                .lastName("")
+                .birthDate(null)
+                .address("")
+                .build();
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response,
-              new TypeReference<>() {
-              });
-          assertEquals("First Name is required", errors.get("firstName"));
-          assertEquals("Last Name is required", errors.get("lastName"));
-        });
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post(TRAINEES_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidRegistrationRequest));
 
-  @Test
-  void testGetTraineeProfileWhenValidRequest() throws Exception {
-    LoginRequest validLoginRequest = LoginRequest.builder()
-        .username("validUsername")
-        .password("validPassword")
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> {
+                    String response = result.getResponse().getContentAsString();
+                    Map<String, String> errors = objectMapper.readValue(response,
+                            new TypeReference<>() {
+                            });
+                    assertEquals("First Name is required", errors.get("firstName"));
+                    assertEquals("Last Name is required", errors.get("lastName"));
+                });
+    }
 
-    TraineeProfile traineeProfile = TraineeProfile.builder()
-        .firstName("John")
-        .lastName("Doe")
-        .birthDate(LocalDate.of(1990, 1, 1))
-        .address("123 Main St")
-        .isActive(true)
-        .build();
+    @Test
+    void testGetTraineeProfileWhenValidRequest() throws Exception {
 
-    when(traineeService.getTraineeProfile(any(LoginRequest.class))).thenReturn(traineeProfile);
+        TraineeProfile traineeProfile = TraineeProfile.builder()
+                .firstName("John")
+                .lastName("Doe")
+                .birthDate(LocalDate.of(1990, 1, 1))
+                .address("123 Main St")
+                .isActive(true)
+                .build();
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/trainee/profile")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(validLoginRequest));
+        when(traineeService.getTraineeProfile(any(String.class))).thenReturn(traineeProfile);
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("John"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Doe"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.birthDate").value("1990-01-01"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.address").value("123 Main St"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.isActive").value(true));
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get(TRAINEES_API + "/profile")
+                .param("username", "validUsername")
+                .contentType(MediaType.APPLICATION_JSON);
 
-  @Test
-  void testGetTraineeProfileWhenNullRequestProperties() throws Exception {
-    LoginRequest invalidLoginRequest = LoginRequest.builder()
-        .username(null)
-        .password(null)
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("John"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Doe"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.birthDate").value("1990-01-01"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.address").value("123 Main St"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.isActive").value(true));
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .get("/api/trainee/profile")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidLoginRequest));
+    @Test
+    void testGetTraineeProfileWhenNullRequestProperties() throws Exception {
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response,
-              new TypeReference<>() {
-              });
-          assertEquals("Username is required", errors.get("username"));
-          assertEquals("Password is required", errors.get("password"));
-        });
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .get(TRAINEES_API + "/profile")
+                .contentType(MediaType.APPLICATION_JSON);
 
-  @Test
-  void testUpdateTraineeProfileWhenValidRequest() throws Exception {
-    UpdateTraineeProfileRequest validUpdateRequest = UpdateTraineeProfileRequest.builder()
-        .username("validUsername")
-        .password("validPassword")
-        .firstName("John")
-        .lastName("Doe")
-        .birthDate(LocalDate.of(1990, 1, 1))
-        .isActive(true)
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
 
-    UpdateTraineeProfileResponse updatedProfileResponse = UpdateTraineeProfileResponse.builder()
-        .username("validUsername")
-        .firstName("John")
-        .lastName("Doe")
-        .birthDate(LocalDate.of(1990, 1, 1))
-        .isActive(true)
-        .build();
+    @Test
+    void testUpdateTraineeProfileWhenValidRequest() throws Exception {
+        UpdateTraineeProfileRequest validUpdateRequest = UpdateTraineeProfileRequest.builder()
+                .username("validUsername")
+                .firstName("John")
+                .lastName("Doe")
+                .birthDate(LocalDate.of(1990, 1, 1))
+                .isActive(true)
+                .build();
 
-    when(traineeService.updateTrainee(any(UpdateTraineeProfileRequest.class))).thenReturn(
-        updatedProfileResponse);
+        UpdateTraineeProfileResponse updatedProfileResponse = UpdateTraineeProfileResponse.builder()
+                .username("validUsername")
+                .firstName("John")
+                .lastName("Doe")
+                .birthDate(LocalDate.of(1990, 1, 1))
+                .isActive(true)
+                .build();
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .put("/api/trainee/update")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(validUpdateRequest));
+        when(traineeService.updateTrainee(any(UpdateTraineeProfileRequest.class))).thenReturn(
+                updatedProfileResponse);
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("validUsername"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("John"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Doe"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.birthDate").value("1990-01-01"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.isActive").value(true));
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .put(TRAINEES_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(validUpdateRequest));
 
-  @Test
-  void testUpdateTraineeProfileNullRequestProperties() throws Exception {
-    UpdateTraineeProfileRequest invalidUpdateRequest = UpdateTraineeProfileRequest.builder()
-        .username(null)
-        .password(null)
-        .firstName(null)
-        .lastName(null)
-        .birthDate(null)
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("validUsername"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("John"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Doe"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.birthDate").value("1990-01-01"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.isActive").value(true));
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .put("/api/trainee/update")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidUpdateRequest));
+    @Test
+    void testUpdateTraineeProfileNullRequestProperties() throws Exception {
+        UpdateTraineeProfileRequest invalidUpdateRequest = UpdateTraineeProfileRequest.builder()
+                .username(null)
+                .firstName(null)
+                .lastName(null)
+                .birthDate(null)
+                .build();
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response,
-              new TypeReference<>() {
-              });
-          assertEquals("Username is required", errors.get("username"));
-          assertEquals("Password is required", errors.get("password"));
-          assertEquals("First Name is required", errors.get("firstName"));
-          assertEquals("Last Name is required", errors.get("lastName"));
-        });
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .put(TRAINEES_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidUpdateRequest));
 
-  @Test
-  void testUpdateTraineeProfileWhenEmptyRequestProperties() throws Exception {
-    UpdateTraineeProfileRequest invalidUpdateRequest = UpdateTraineeProfileRequest.builder()
-        .username("")
-        .password("")
-        .firstName("")
-        .lastName("")
-        .birthDate(null)
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> {
+                    String response = result.getResponse().getContentAsString();
+                    Map<String, String> errors = objectMapper.readValue(response,
+                            new TypeReference<>() {
+                            });
+                    assertEquals("Username is required", errors.get("username"));
+                    assertEquals("First Name is required", errors.get("firstName"));
+                    assertEquals("Last Name is required", errors.get("lastName"));
+                });
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .put("/api/trainee/update")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidUpdateRequest));
+    @Test
+    void testUpdateTraineeProfileWhenEmptyRequestProperties() throws Exception {
+        UpdateTraineeProfileRequest invalidUpdateRequest = UpdateTraineeProfileRequest.builder()
+                .username("")
+                .firstName("")
+                .lastName("")
+                .birthDate(null)
+                .build();
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response,
-              new TypeReference<>() {
-              });
-          assertEquals("Username is required", errors.get("username"));
-          assertEquals("Password is required", errors.get("password"));
-          assertEquals("First Name is required", errors.get("firstName"));
-          assertEquals("Last Name is required", errors.get("lastName"));
-        });
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .put(TRAINEES_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidUpdateRequest));
 
-  @Test
-  void testDeleteTraineeProfileWhenValidRequest() throws Exception {
-    LoginRequest validLoginRequest = LoginRequest.builder()
-        .username("validUsername")
-        .password("validPassword")
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> {
+                    String response = result.getResponse().getContentAsString();
+                    Map<String, String> errors = objectMapper.readValue(response,
+                            new TypeReference<>() {
+                            });
+                    assertEquals("Username is required", errors.get("username"));
+                    assertEquals("First Name is required", errors.get("firstName"));
+                    assertEquals("Last Name is required", errors.get("lastName"));
+                });
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .delete("/api/trainee/delete")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(validLoginRequest));
+    @Test
+    void testDeleteTraineeProfileWhenValidRequest() throws Exception {
+        LoginRequest validLoginRequest = LoginRequest.builder()
+                .username("validUsername")
+                .password("validPassword")
+                .build();
+        String validUsername = "validUsername";
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.content().string("Trainee profile deleted successfully"));
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .delete(TRAINEES_API)
+                .param("username", validUsername)
+                .contentType(MediaType.APPLICATION_JSON);
 
-    verify(traineeService).deleteTraineeByUsername(validLoginRequest.getUsername());
-  }
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
 
-  @Test
-  void testDeleteTraineeProfileWhenInvalidRequest() throws Exception {
-    LoginRequest invalidLoginRequest = LoginRequest.builder()
-        .username(null)
-        .password(null)
-        .build();
+        verify(traineeService).deleteTraineeByUsername(validUsername);
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .delete("/api/trainee/delete")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidLoginRequest));
+    @Test
+    void testDeleteTraineeProfileWhenInvalidRequest() throws Exception {
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response, new TypeReference<>() {
-          });
-          assertEquals("Username is required", errors.get("username"));
-          assertEquals("Password is required", errors.get("password"));
-        });
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .delete(TRAINEES_API)
+                .contentType(MediaType.APPLICATION_JSON);
 
-    verify(traineeService, never()).deleteTraineeByUsername(anyString());
-  }
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 
-  @Test
-  void testUpdateTraineeTrainersListWhenValidRequest() throws Exception {
-    UpdateTraineeTrainersListRequest validUpdateRequest = UpdateTraineeTrainersListRequest.builder()
-        .traineeUsername("validUsername")
-        .trainerUsernames(Arrays.asList("trainer1", "trainer2"))
-        .build();
+        verify(traineeService, never()).deleteTraineeByUsername(anyString());
+    }
 
-    List<TrainerShortInfo> updatedTrainersList = Arrays.asList(
-        TrainerShortInfo.builder().username("trainer1").build(),
-        TrainerShortInfo.builder().username("trainer2").build()
-    );
+    @Test
+    void testUpdateTraineeTrainersListWhenValidRequest() throws Exception {
+        UpdateTraineeTrainersListRequest validUpdateRequest = UpdateTraineeTrainersListRequest.builder()
+                .traineeUsername("validUsername")
+                .trainerUsernames(Arrays.asList("trainer1", "trainer2"))
+                .build();
 
-    when(traineeService.updateTraineeTrainersList(
-        any(UpdateTraineeTrainersListRequest.class))).thenReturn(updatedTrainersList);
+        List<TrainerShortInfo> updatedTrainersList = Arrays.asList(
+                TrainerShortInfo.builder().username("trainer1").build(),
+                TrainerShortInfo.builder().username("trainer2").build()
+        );
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .put("/api/trainee/update-trainers")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(validUpdateRequest));
+        when(traineeService.updateTraineeTrainersList(
+                any(UpdateTraineeTrainersListRequest.class))).thenReturn(updatedTrainersList);
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$[0].username").value("trainer1"))
-        .andExpect(MockMvcResultMatchers.jsonPath("$[1].username").value("trainer2"));
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .put(TRAINEES_API + "/update-trainers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(validUpdateRequest));
 
-  @Test
-  void testUpdateTraineeTrainersListWhenInvalidRequest() throws Exception {
-    UpdateTraineeTrainersListRequest invalidUpdateRequest = UpdateTraineeTrainersListRequest.builder()
-        .traineeUsername(null)
-        .trainerUsernames(null)
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].username").value("trainer1"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[1].username").value("trainer2"));
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .put("/api/trainee/update-trainers")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidUpdateRequest));
+    @Test
+    void testUpdateTraineeTrainersListWhenInvalidRequest() throws Exception {
+        UpdateTraineeTrainersListRequest invalidUpdateRequest = UpdateTraineeTrainersListRequest.builder()
+                .traineeUsername(null)
+                .trainerUsernames(null)
+                .build();
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response, new TypeReference<>() {
-          });
-          assertEquals("Trainee's username is required", errors.get("traineeUsername"));
-          assertEquals("List of trainers' usernames is required", errors.get("trainerUsernames"));
-        });
-  }
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .put(TRAINEES_API + "/update-trainers")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidUpdateRequest));
 
-  @Test
-  void testChangeTraineeActiveStatusWhenValidRequest() throws Exception {
-    ChangeUserActiveStatusRequest validStatusChangeRequest = ChangeUserActiveStatusRequest.builder()
-        .username("validUsername")
-        .password("validPassword")
-        .isActive(true)
-        .build();
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> {
+                    String response = result.getResponse().getContentAsString();
+                    Map<String, String> errors = objectMapper.readValue(response, new TypeReference<>() {
+                    });
+                    assertEquals("Trainee's username is required", errors.get("traineeUsername"));
+                    assertEquals("List of trainers' usernames is required", errors.get("trainerUsernames"));
+                });
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .patch("/api/trainee/active-status")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(validStatusChangeRequest));
+    @Test
+    void testChangeTraineeActiveStatusWhenValidRequest() throws Exception {
+        ChangeUserActiveStatusRequest validStatusChangeRequest = ChangeUserActiveStatusRequest.builder()
+                .username("validUsername")
+                .isActive(true)
+                .build();
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.content().string("Trainee activated successfully"));
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .patch(TRAINEES_API + "/active-status")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(validStatusChangeRequest));
 
-    verify(traineeService).changeTraineeActiveStatus(validStatusChangeRequest);
-  }
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Trainee activated successfully"));
 
-  @Test
-  void testChangeTraineeActiveStatusWhenInvalidRequest() throws Exception {
-    ChangeUserActiveStatusRequest invalidStatusChangeRequest = ChangeUserActiveStatusRequest.builder()
-        .username(null)
-        .password(null)
-        .build();
+        verify(traineeService).changeTraineeActiveStatus(validStatusChangeRequest);
+    }
 
-    MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
-        .patch("/api/trainee/active-status")
-        .contentType(MediaType.APPLICATION_JSON)
-        .content(objectMapper.writeValueAsString(invalidStatusChangeRequest));
+    @Test
+    void testChangeTraineeActiveStatusWhenInvalidRequest() throws Exception {
+        ChangeUserActiveStatusRequest invalidStatusChangeRequest = ChangeUserActiveStatusRequest.builder()
+                .username(null)
+                .build();
 
-    mockMvc.perform(requestBuilder)
-        .andExpect(MockMvcResultMatchers.status().isBadRequest())
-        .andExpect(result -> {
-          String response = result.getResponse().getContentAsString();
-          Map<String, String> errors = objectMapper.readValue(response,
-              new TypeReference<>() {
-              });
-          assertEquals("Username is required", errors.get("username"));
-          assertEquals("Password is required", errors.get("password"));
-        });
+        MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders
+                .patch(TRAINEES_API + "/active-status")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(invalidStatusChangeRequest));
 
-    verify(traineeService, never()).changeTraineeActiveStatus(
-        any(ChangeUserActiveStatusRequest.class));
-  }
+        mockMvc.perform(requestBuilder)
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(result -> {
+                    String response = result.getResponse().getContentAsString();
+                    Map<String, String> errors = objectMapper.readValue(response,
+                            new TypeReference<>() {
+                            });
+                    assertEquals("Username is required", errors.get("username"));
+                });
+
+        verify(traineeService, never()).changeTraineeActiveStatus(
+                any(ChangeUserActiveStatusRequest.class));
+    }
 }

@@ -1,7 +1,6 @@
 package com.xstack.gymapp.controller;
 
 import com.xstack.gymapp.model.payload.ChangeUserActiveStatusRequest;
-import com.xstack.gymapp.model.payload.LoginRequest;
 import com.xstack.gymapp.model.payload.TrainerRegistrationRequest;
 import com.xstack.gymapp.model.payload.UpdateTrainerProfileRequest;
 import com.xstack.gymapp.model.payload.UpdateTrainerProfileResponse;
@@ -59,9 +58,13 @@ public class TrainerController extends BaseController {
   }
 
   @Operation(summary = "Activate / deactivate trainer", description = "Change trainer's isActive status")
-  @PatchMapping("/active-status")
-  public ResponseEntity<String> changeTraineeActiveStatus(
-      @Valid @RequestBody ChangeUserActiveStatusRequest request) {
+  @PatchMapping(value = "/active-status", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> changeTraineeActiveStatus(
+      @Valid @RequestBody ChangeUserActiveStatusRequest request, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return handleValidationErrors(bindingResult);
+    }
+
     trainerService.changeTrainerActiveStatus(request);
     String bodyMessage = request.isActive() ? "Trainer activated successfully" :
         "Trainer deactivated successfully";
