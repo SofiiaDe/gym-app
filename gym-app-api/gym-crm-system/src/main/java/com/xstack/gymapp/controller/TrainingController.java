@@ -1,7 +1,6 @@
 package com.xstack.gymapp.controller;
 
 import com.xstack.gymapp.model.payload.AddTrainingRequest;
-import com.xstack.gymapp.model.payload.LoginRequest;
 import com.xstack.gymapp.search.TraineeTrainingSearchCriteria;
 import com.xstack.gymapp.search.TrainerTrainingSearchCriteria;
 import com.xstack.gymapp.service.TrainingService;

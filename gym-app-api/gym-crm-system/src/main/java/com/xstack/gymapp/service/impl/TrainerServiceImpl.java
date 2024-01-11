@@ -3,6 +3,7 @@ package com.xstack.gymapp.service.impl;
 import com.xstack.gymapp.exception.EntityNotFoundException;
 import com.xstack.gymapp.exception.TraineeProcessingException;
 import com.xstack.gymapp.exception.TrainerProcessingException;
+import com.xstack.gymapp.message.MessageProducer;
 import com.xstack.gymapp.model.dto.TraineeDto;
 import com.xstack.gymapp.model.dto.TrainerDto;
 import com.xstack.gymapp.model.dto.TrainingTypeDto;
@@ -47,6 +48,7 @@ public class TrainerServiceImpl implements TrainerService {
     private UserMapper userMapper;
     private UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private MessageProducer messageProducer;
 
     @Override
     @Transactional
@@ -163,15 +165,16 @@ public class TrainerServiceImpl implements TrainerService {
                 .orElseThrow(() -> new EntityNotFoundException(TRAINER_NOT_FOUND_BY_ID + trainerId));
         trainer.getUser().setActive(true);
         trainerRepository.save(trainer);
+        messageProducer.sendMessage("change-active-status-topic", buildMessageAboutTrainerActiveStatusChange(trainer));
     }
 
     @Override
     public void deactivateTrainer(Long trainerId) {
         Trainer trainer = trainerRepository.findById(trainerId)
                 .orElseThrow(() -> new EntityNotFoundException(TRAINER_NOT_FOUND_BY_ID + trainerId));
-
         trainer.getUser().setActive(false);
         trainerRepository.save(trainer);
+        messageProducer.sendMessage("change-active-status-topic", buildMessageAboutTrainerActiveStatusChange(trainer));
     }
 
     @Override
@@ -239,5 +242,18 @@ public class TrainerServiceImpl implements TrainerService {
             }
         }
         return traineeShortInfoList;
+    }
+
+    private String buildMessageAboutTrainerActiveStatusChange(Trainer trainer) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("The profile of the trainer ")
+                .append(trainer.getUser().getFirstName())
+                .append(" ")
+                .append(trainer.getUser().getLastName())
+                .append(" (ID=")
+                .append(trainer.getId())
+                .append(") was ")
+                .append(trainer.getUser().isActive() ? "activated." : "deactivated.");
+        return sb.toString();
     }
 }
