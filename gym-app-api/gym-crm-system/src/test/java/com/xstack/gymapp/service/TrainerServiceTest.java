@@ -16,6 +16,7 @@ import static org.mockito.Mockito.when;
 
 import com.xstack.gymapp.exception.EntityNotFoundException;
 import com.xstack.gymapp.exception.TraineeProcessingException;
+import com.xstack.gymapp.message.MessageProducer;
 import com.xstack.gymapp.model.dto.TraineeDto;
 import com.xstack.gymapp.model.dto.TrainerDto;
 import com.xstack.gymapp.model.dto.TrainingTypeDto;
@@ -74,6 +75,9 @@ class TrainerServiceTest {
   @Mock
   private PasswordEncoder passwordEncoder;
 
+  @Mock
+  private MessageProducer messageProducer;
+
   private TrainerService trainerService;
 
   private Validator validator;
@@ -81,7 +85,7 @@ class TrainerServiceTest {
   @BeforeEach
   public void setUp() {
     trainerService = new TrainerServiceImpl(trainerRepository, userRepository, trainingTypeService,
-        trainerMapper, userMapper, userService, passwordEncoder);
+        trainerMapper, userMapper, userService, passwordEncoder, messageProducer);
     ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
     validator = factory.getValidator();
   }
