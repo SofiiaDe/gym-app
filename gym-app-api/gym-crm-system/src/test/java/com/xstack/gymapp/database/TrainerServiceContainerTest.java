@@ -45,10 +45,6 @@ public class TrainerServiceContainerTest {
     @Autowired
     private TrainerService trainerService;
 
-    public void setUp() {
-
-    }
-
     @Test
     void testCreateTrainer() {
         trainerService.createTrainer(TrainerRegistrationRequest.builder()
